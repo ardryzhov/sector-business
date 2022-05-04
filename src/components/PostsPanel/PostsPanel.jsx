@@ -1,6 +1,8 @@
 import React from 'react'
 import './PostsPanel.scss'
 
+import PostsList from '../PostsList'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 

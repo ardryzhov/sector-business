@@ -1,0 +1,23 @@
+.post_item__wrap {
+	width: 100%;
+	display: flex;
+	.post__item_id {
+		width: 8%;
+		justify-content: center;
+	}
+	.post__item_title,
+	.post__item_body {
+		width: 50%;
+		padding: 15px 10px;
+	}
+	.post__item_id,
+	.post__item_title,
+	.post__item_body {
+		display: flex;
+		align-items: center;
+		border: 1px solid #ccc;
+	}
+	span {
+		display: inline-block;
+	}
+}
