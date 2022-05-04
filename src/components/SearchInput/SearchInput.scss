@@ -1,0 +1,24 @@
+.input__wrap {
+	margin: 15px 10px;
+	background-color: #5a5c66;
+	width: 40%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 15px;
+
+	input {
+		margin: 15px 10px 15px 25px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		color: #fff;
+		font-size: 1.2rem;
+	}
+
+	.input__icon {
+		color: #fff;
+		font-size: 1.2rem;
+	}
+}
