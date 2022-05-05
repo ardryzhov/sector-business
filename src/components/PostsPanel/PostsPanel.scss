@@ -1,7 +1,7 @@
 .posts_panel__wrap {
 	margin: 15px 10px 0px;
 	background-color: #474955;
-	padding: 15px 20px;
+	padding: 15px 0px;
 	color: #fff;
 
 	.posts_panel__btns {
@@ -20,13 +20,16 @@
 
 		.posts_btn__id {
 			width: 8%;
+			.sort__btn {
+				width: 50%;
+			}
 		}
 		.posts_btn__title,
 		.posts_btn__desc {
 			width: 50%;
 		}
 		.sort__btn {
-			width: 140px;
+			width: 20%;
 			font-size: 1.2rem;
 			display: flex;
 			flex-direction: row;

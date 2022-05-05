@@ -1,30 +1,33 @@
 import React from 'react'
 import './PostsPanel.scss'
 
-import PostsList from '../PostsList'
+import { sortUsers } from '../../redux/userSlice'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux'
 
 const PostsPanel = () => {
+	const dispatch = useDispatch()
+	const sortBy = (val) => dispatch(sortUsers({ tag: val }))
 	return (
 		<>
 			<div className='posts_panel__wrap'>
 				<div className='posts_panel__btns'>
 					<div className='posts_btn__id'>
-						<div className='sort__btn'>
+						<div className='sort__btn' onClick={() => sortBy('id')}>
 							<span>ID</span>
 							<FontAwesomeIcon icon={faAngleDown} />
 						</div>
 					</div>
 					<div className='posts_btn__title'>
-						<div className='sort__btn'>
+						<div className='sort__btn' onClick={() => sortBy('title')}>
 							<span>Заголовок</span>
 							<FontAwesomeIcon icon={faAngleDown} />
 						</div>
 					</div>
 					<div className='posts_btn__desc'>
-						<div className='sort__btn'>
+						<div className='sort__btn' onClick={() => sortBy('body')}>
 							<span>Описание</span>
 							<FontAwesomeIcon icon={faAngleDown} />
 						</div>

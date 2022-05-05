@@ -42,12 +42,17 @@ function App() {
 					setCurrentPage={setCurrentPage}
 					usersPerPage={usersPerPage}
 				/>
-				<Pagination
-					usersPerPage={usersPerPage}
-					totalPage={users.length}
-					paginate={paginate}
-					currentPage={currentPage}
-				/>
+				{loading ? (
+					''
+				) : (
+					<Pagination
+						loading={loading}
+						usersPerPage={usersPerPage}
+						totalPage={users.length}
+						paginate={paginate}
+						currentPage={currentPage}
+					/>
+				)}
 			</div>
 		</div>
 	)
