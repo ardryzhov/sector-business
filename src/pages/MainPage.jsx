@@ -10,28 +10,32 @@ import { getUsersFetch } from '../redux/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import ClockLoader from 'react-spinners/ClockLoader'
 import { css } from '@emotion/react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const MainPage = () => {
 	const dispatch = useDispatch()
 
 	const { page } = useParams()
+	const navigate = useNavigate()
 
 	const state = useSelector((store) => store.users)
 
-	const users = state.users
-	const filtUsers = state.filtredUsers
+	const {
+		users,
+		filtredUsers,
+		currentPage,
+		userPerPage,
+		totalPage,
+		filtredPage,
+	} = state
 
-	const currentPage = state.currentPage
-	const userPerPage = state.userPerPage
-
-	const [filtredUsers, setFilteredUsers] = useState(filtUsers)
+	const [filtUsers, setFiltUsers] = useState(filtredUsers)
 	const [input, setInput] = useState('')
 
 	const lastUserIdx = currentPage * userPerPage
 	const firstUserIdx = lastUserIdx - userPerPage
 	const currentUsers = users.slice(firstUserIdx, lastUserIdx)
-	const currentFiltredUsers = filtredUsers.slice(firstUserIdx, lastUserIdx)
+	const currentFiltredUsers = filtUsers.slice(firstUserIdx, lastUserIdx)
 
 	const override = css`
 		display: block;
@@ -42,10 +46,16 @@ const MainPage = () => {
 
 	useEffect(() => {
 		dispatch(changePage(page))
+		if (!Number(page)) {
+			navigate('/1')
+		}
+		if (page > totalPage.length || page > filtredPage.length) {
+			navigate('/1')
+		}
 	}, [page])
 
 	useEffect(() => {
-		setFilteredUsers(filtUsers)
+		setFiltUsers(filtUsers)
 	}, [filtUsers])
 
 	useEffect(() => {
@@ -62,7 +72,7 @@ const MainPage = () => {
 					<>
 						<PostsList
 							currentUsers={
-								filtredUsers.length || input.length
+								filtUsers.length || input.length
 									? currentFiltredUsers
 									: currentUsers
 							}
