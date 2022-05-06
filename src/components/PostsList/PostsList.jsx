@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './PostsList.scss'
 
 import PostItem from '../PostItem'
 
-const PostsList = ({ currentUsers, loading }) => {
-	// useEffect(() => {
-	// 	console.log(currentUsers)
-	// }, [currentUsers])
+const PostsList = ({ currentUsers }) => {
 	return (
 		<>
 			<div className='posts_list__wrap'>

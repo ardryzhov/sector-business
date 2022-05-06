@@ -3,7 +3,10 @@
 	padding: 15px;
 	align-items: center;
 	justify-content: space-evenly;
-
+	a {
+		color: #000;
+		text-decoration: none;
+	}
 	.page_btn {
 		cursor: pointer;
 		font-weight: 600;
@@ -11,9 +14,13 @@
 		padding: 10px 15px;
 		border: 1px solid #000;
 		border-radius: 6px;
-	}
-	button:disabled {
-		cursor: not-allowed;
+		&.disable_link {
+			cursor: not-allowed;
+			font-weight: 400;
+			border: 1px solid #ccc;
+			color: #ccc;
+			background-color: rgba(206, 206, 206, 0.5);
+		}
 	}
 
 	ul {
@@ -24,8 +31,11 @@
 			cursor: pointer;
 			font-size: 1.2rem;
 			font-weight: 600;
-
-			&.active__page {
+			a {
+				color: #000;
+				text-decoration: none;
+			}
+			&.active__page a {
 				color: #7ebc3c;
 			}
 		}

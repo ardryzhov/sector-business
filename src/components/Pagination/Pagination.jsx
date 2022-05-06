@@ -1,45 +1,55 @@
 import React from 'react'
 import './Pagination.scss'
 
-const Pagination = ({ usersPerPage, totalPage, paginate, currentPage }) => {
-	const pageNumbers = []
+import { changePage } from '../../redux/userSlice'
 
-	for (let i = 1; i <= Math.ceil(totalPage / usersPerPage); i++) {
-		pageNumbers.push(i)
-	}
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-	const prevBtn = currentPage - 1 !== 0
-	const nextBtn = currentPage + 1 <= pageNumbers.length
+const Pagination = ({ currentPage }) => {
+	const state = useSelector((state) => state.users)
+	const totalPage = state.totalPage
+	const filtredPage = state.filtredPage
+	const dispatch = useDispatch()
+
+	const pageArr = filtredPage.length ? filtredPage : totalPage
+
+	const prevBtn = +currentPage - 1 !== 0
+	const nextBtn = +currentPage + 1 > pageArr.length
 
 	return (
 		<div className='pagination__wrap'>
-			<button
-				className='page_btn'
-				onClick={() => (prevBtn ? paginate(currentPage - 1) : false)}
-				disabled={!prevBtn}
+			<Link
+				className={prevBtn ? 'page_btn' : 'page_btn disable_link'}
+				onClick={() =>
+					prevBtn ? dispatch(changePage(+currentPage - 1)) : false
+				}
+				to={prevBtn ? `/${+currentPage - 1}` : `/${currentPage}`}
 			>
 				Назад
-			</button>
+			</Link>
 			<ul>
-				{pageNumbers.map((i) => (
+				{pageArr.map((i) => (
 					<li
 						className={
-							i === currentPage ? 'page__item active__page' : 'page__item'
+							i === +currentPage ? 'page__item active__page' : 'page__item'
 						}
 						key={i}
-						onClick={() => paginate(i)}
+						onClick={() => dispatch(changePage(i))}
 					>
-						<span>{i}</span>
+						<Link to={`/${i}`}>{i}</Link>
 					</li>
 				))}
 			</ul>
-			<button
-				className='page_btn'
-				onClick={() => (nextBtn ? paginate(currentPage + 1) : false)}
-				disabled={!nextBtn}
+			<Link
+				className={nextBtn ? 'page_btn disable_link' : 'page_btn'}
+				onClick={() =>
+					!nextBtn ? dispatch(changePage(+currentPage + 1)) : false
+				}
+				to={!nextBtn ? `/${+currentPage + 1}` : `/${currentPage}`}
 			>
 				Вперед
-			</button>
+			</Link>
 		</div>
 	)
 }

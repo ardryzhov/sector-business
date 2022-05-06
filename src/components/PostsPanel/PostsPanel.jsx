@@ -6,10 +6,15 @@ import { sortUsers } from '../../redux/userSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const PostsPanel = () => {
 	const dispatch = useDispatch()
-	const sortBy = (val) => dispatch(sortUsers({ tag: val }))
+	const navigate = useNavigate()
+	const sortBy = (val) => {
+		dispatch(sortUsers({ tag: val }))
+		navigate('/1')
+	}
 	return (
 		<>
 			<div className='posts_panel__wrap'>
