@@ -49,14 +49,12 @@ const userSlice = createSlice({
 		filterUsers(state, action) {
 			state.filtredUsers = [...action.payload]
 			state.filtredPage = []
-			if (state.filtredPage.length === 0) {
-				for (
-					let i = 1;
-					i <= Math.ceil(action.payload.length / state.userPerPage);
-					i++
-				) {
-					state.filtredPage.push(i)
-				}
+			for (
+				let i = 1;
+				i <= Math.ceil(action.payload.length / state.userPerPage);
+				i++
+			) {
+				state.filtredPage.push(i)
 			}
 		},
 		sortUsers(state, action) {

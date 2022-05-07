@@ -45,23 +45,26 @@ const MainPage = () => {
 	`
 
 	useEffect(() => {
-		dispatch(changePage(page))
-		if (!Number(page)) {
-			navigate('/1')
-		}
-		if (page > totalPage.length || page > filtredPage.length) {
-			navigate('/1')
-		}
-	}, [page])
-
-	useEffect(() => {
-		setFiltUsers(filtUsers)
-	}, [filtUsers])
+		setFiltUsers(filtredUsers)
+	}, [filtredUsers])
 
 	useEffect(() => {
 		dispatch(getUsersFetch())
 		dispatch(changePage(page))
 	}, [])
+
+	useEffect(() => {
+		dispatch(changePage(page))
+		if (!Number(+page)) {
+			navigate('/1')
+		}
+		if (
+			!totalPage.length &&
+			(page > totalPage.length || page > filtredPage.length)
+		) {
+			navigate('/1')
+		}
+	}, [page, totalPage])
 
 	return (
 		<div className='app-wrap'>
@@ -78,7 +81,7 @@ const MainPage = () => {
 							}
 						/>
 
-						<Pagination currentPage={currentPage} />
+						<Pagination currentPage={currentPage} input={input} />
 					</>
 				) : (
 					<ClockLoader css={override} size={150} />
